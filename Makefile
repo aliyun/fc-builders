@@ -16,5 +16,14 @@ unit-test:
 	@mocha $(TEST_FOLDER) -t $(TIMEOUT) -R spec --recursive -name $(TEST_FILES)
 
 test: lint unit-test
+
+clean:
+	@rm -rf output
+
+binary: clean
+	@./binary.sh
+
+upload:
+	@./upload.sh
 	
-.PHONY: test clean binary
+.PHONY: test clean binary upload
