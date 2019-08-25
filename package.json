@@ -7,7 +7,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "binary": "pkg -t node8-linux-x64 -o ./output/fun-install .",
+    "binary": "make binary",
     "lint": "eslint --fix lib bin test",
     "validate-lint": "eslint lib bin test"
   },

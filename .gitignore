@@ -2,3 +2,4 @@ output/
 .vscode/
 node_modules/
 .fun/
+.oss_cfg
