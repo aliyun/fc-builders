@@ -17,6 +17,7 @@ describe('test PipInstallTask', () => {
   beforeEach(async () => {
     sandbox.stub(cmd, 'execCommand').resolves({});
     sandbox.stub(fs, 'pathExists').resolves(true);
+    sandbox.stub(fs, 'ensureDir').resolves(true);
   });
 
   afterEach(() => {
@@ -30,6 +31,7 @@ describe('test PipInstallTask', () => {
     await pipInstallTask.run();
 
     assert.calledWith(fs.pathExists, path.join(sourceDir, 'requirements.txt'));
-    assert.calledWith(cmd.execCommand, 'pip', ['install', '--disable-pip-version-check', '-t', artifactDir, '-r', path.join(sourceDir, '/requirements.txt')]);
+    assert.calledWith(cmd.execCommand, 'pip', ['install', '--user', '-r', path.join(sourceDir, '/requirements.txt')]);
+    assert.calledWith(fs.ensureDir, '/artifactDir/.fun/python');
   });
 });

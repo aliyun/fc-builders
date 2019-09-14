@@ -38,6 +38,7 @@ const builder = new Builder(params.serviceName,
   params.sourceDir,
   params.runtime,
   params.artifactDir,
-  params.verbose);
+  params.verbose,
+  params.stages);
 
 builder.build().catch(handler);
