@@ -12,7 +12,7 @@ const cmd = require('../../../../lib/utils/command');
 
 describe('test PipInstallTask', () => {
   const sourceDir = '/code';
-  const artifactDir = '/artifactDir';
+  const artifactDir = '/artifacts';
 
   beforeEach(async () => {
     sandbox.stub(cmd, 'execCommand').resolves({});
@@ -32,6 +32,6 @@ describe('test PipInstallTask', () => {
 
     assert.calledWith(fs.pathExists, path.join(sourceDir, 'requirements.txt'));
     assert.calledWith(cmd.execCommand, 'pip', ['install', '--user', '-r', path.join(sourceDir, '/requirements.txt')]);
-    assert.calledWith(fs.ensureDir, '/artifactDir/.fun/python');
+    assert.calledWith(fs.ensureDir, path.join(artifactDir, '.fun', 'python'));
   });
 });
