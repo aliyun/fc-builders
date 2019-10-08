@@ -78,3 +78,13 @@ describe('test generateTmpDir', () => {
     assert.notCalled(fs.ensureDir);
   });
 });
+
+describe('test checkRule', () => {
+  it('checkRule', () => {
+    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'nas'))).to.be(true);
+    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'build'))).to.be(true);
+    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'tmp'))).to.be(true);
+    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('tmp', 'test'))).to.be(false);
+    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('tmp'))).to.be(false);
+  });
+});
