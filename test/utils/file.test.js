@@ -12,6 +12,12 @@ const path = require('path');
 
 const fileUtils = require('../../lib/utils/file');
 
+const DEFAULT_IGNORED_FOLDER = [
+  path.join('.fun', 'build'), 
+  path.join('.fun', 'nas'), 
+  path.join('.fun', 'tmp')
+];
+
 describe('test copySourceTo', () => {
 
   let tmpdir1;
@@ -81,10 +87,10 @@ describe('test generateTmpDir', () => {
 
 describe('test checkRule', () => {
   it('checkRule', () => {
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'nas'))).to.be(true);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'build'))).to.be(true);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'tmp'))).to.be(true);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('tmp', 'test'))).to.be(false);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('tmp'))).to.be(false);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('.fun', 'nas'))).to.be(true);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('.fun', 'build'))).to.be(true);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('.fun', 'tmp'))).to.be(true);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('tmp', 'test'))).to.be(false);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('tmp'))).to.be(false);
   });
 });
