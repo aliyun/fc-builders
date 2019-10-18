@@ -12,6 +12,12 @@ const path = require('path');
 
 const fileUtils = require('../../lib/utils/file');
 
+const DEFAULT_IGNORED_FOLDER = [
+  path.join('.fun', 'build'), 
+  path.join('.fun', 'nas'), 
+  path.join('.fun', 'tmp')
+];
+
 describe('test copySourceTo', () => {
 
   let tmpdir1;
@@ -38,6 +44,9 @@ describe('test copySourceTo', () => {
     await fs.mkdirp(path.join(tmpdir1, '.fun', 'nas', 'c'));
     await fs.mkdirp(path.join(tmpdir1, '.fun', 'python'));
     await fs.writeFile(path.join(tmpdir1, 'd'), 'd');
+    // to check funignore work
+    await fs.writeFile(path.join(tmpdir1, '.fun', 'tmp'), 'content');
+
 
     await fileUtils.copySourceTo(tmpdir1, tmpdir2, ['d']);
 
@@ -46,6 +55,9 @@ describe('test copySourceTo', () => {
     expect(await fs.pathExists(path.join(tmpdir2, '.fun', 'nas', 'c'))).to.be(false);
     expect(await fs.pathExists(path.join(tmpdir2, '.fun', 'python'))).to.be(true);
     expect(await fs.pathExists(path.join(tmpdir2, 'd'))).to.be(false);
+    // to check funignore work
+    expect(await fs.pathExists(path.join(tmpdir2, '.fun', 'tmp', 'c'))).to.be(false);
+
   });
 });
 
@@ -81,10 +93,10 @@ describe('test generateTmpDir', () => {
 
 describe('test checkRule', () => {
   it('checkRule', () => {
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'nas'))).to.be(true);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'build'))).to.be(true);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('.fun', 'tmp'))).to.be(true);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('tmp', 'test'))).to.be(false);
-    expect(fileUtils.checkRule(fileUtils.DEFAULT_IGNORED_FOLDER, path.join('tmp'))).to.be(false);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('.fun', 'nas'))).to.be(true);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('.fun', 'build'))).to.be(true);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('.fun', 'tmp'))).to.be(true);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('tmp', 'test'))).to.be(false);
+    expect(fileUtils.checkRule(DEFAULT_IGNORED_FOLDER, path.join('tmp'))).to.be(false);
   });
 });
