@@ -44,6 +44,9 @@ describe('test copySourceTo', () => {
     await fs.mkdirp(path.join(tmpdir1, '.fun', 'nas', 'c'));
     await fs.mkdirp(path.join(tmpdir1, '.fun', 'python'));
     await fs.writeFile(path.join(tmpdir1, 'd'), 'd');
+    // to check funignore work
+    await fs.writeFile(path.join(tmpdir1, '.fun', 'tmp'), 'content');
+
 
     await fileUtils.copySourceTo(tmpdir1, tmpdir2, ['d']);
 
@@ -52,6 +55,9 @@ describe('test copySourceTo', () => {
     expect(await fs.pathExists(path.join(tmpdir2, '.fun', 'nas', 'c'))).to.be(false);
     expect(await fs.pathExists(path.join(tmpdir2, '.fun', 'python'))).to.be(true);
     expect(await fs.pathExists(path.join(tmpdir2, 'd'))).to.be(false);
+    // to check funignore work
+    expect(await fs.pathExists(path.join(tmpdir2, '.fun', 'tmp', 'c'))).to.be(false);
+
   });
 });
 
