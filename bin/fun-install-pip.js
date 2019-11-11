@@ -13,4 +13,6 @@ program.command('install')
     require('../lib/commands/pip')(packages, program.commands[0]).catch(handler);
   });
 
+require('../lib/utils/command').registerCommandChecker(program);
+
 program.parse(process.argv);
