@@ -9,17 +9,11 @@ const program = require('commander');
 program
   .name('fun local')
   .description('build function codes or install related depedencies for Function Compute')
-  .command('apt-get', 'install apt depencies')
-  .command('pip', 'install pip depencies')
-  .command('build', 'build function codes for Function Compute');
+  .command('apt-get', 'install apt packages').alias('apt')
+  .command('pip', 'install pip packages')
+  .command('npm', 'install npm packages')
+  .command('build', 'build function codes for Function Compute (Only used for funcraft)');
 
-// Print help information if commands are unknown.
-program.on('command:*', (cmds) => {
-  if (!program.commands.map((command) => command.name()).includes(cmds[0])) {
-    console.error();
-    console.error("  error: unknown command '%s'", cmds[0]);
-    program.help();
-  }
-});
+require('../lib/utils/command').registerCommandChecker(program);
 
 program.parse(process.argv);
