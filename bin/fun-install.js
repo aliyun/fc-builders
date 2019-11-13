@@ -12,7 +12,7 @@ program
   .command('apt-get', 'install apt packages').alias('apt')
   .command('pip', 'install pip packages')
   .command('npm', 'install npm packages')
-  .command('build', 'build function codes for Function Compute (Only used for funcraft)')
+  .command('build', 'build function codes for Function Compute (Only used for funcraft)');
 
 require('../lib/utils/command').registerCommandChecker(program);
 

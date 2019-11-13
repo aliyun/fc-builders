@@ -5,6 +5,16 @@ const expect = require('expect.js');
 
 describe('install_env', ()=>{
 
+  let originEnv;
+  beforeEach(() => {
+    originEnv = process.env;
+    process.env = {};
+  });
+
+  afterEach(() => {
+    process.env = originEnv;
+  });
+
   it('no_settings', () => {
     const envs = addEnv({});
 
