@@ -19,8 +19,6 @@ program
 program
   .option('--json-params <params>', 'build parameters represented by json'); // todo: 
 
-require('../lib/utils/command').registerCommandChecker(program);
-
 program.parse(process.argv);
 
 if (!program.jsonParams) {
