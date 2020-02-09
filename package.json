@@ -1,6 +1,6 @@
 {
   "name": "@alicloud/fc-builders",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "builders for Aliyun Function Compute",
   "engines": {
     "node": ">=8.0.0"
