@@ -31,6 +31,6 @@ describe('test NpmInstallTask', () => {
     await npmInstallTask.run();
 
     assert.calledWith(fs.pathExists, path.join(artifactDir, 'package.json'));
-    assert.calledWith(cmd.execCommand, 'npm', ['install', '-q', '--no-audit', '--no-save'], artifactDir);
+    assert.calledWith(cmd.execCommand, 'npm', ['install', '-q', '--no-audit', '--no-save'], path.resolve(artifactDir));
   });
 });
