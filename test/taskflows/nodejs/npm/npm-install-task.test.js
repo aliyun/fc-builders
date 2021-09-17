@@ -26,6 +26,8 @@ describe('test NpmInstallTask', () => {
 
     const npmInstallTask = new NpmInstallTask(artifactDir);
 
+    sandbox.replace(npmInstallTask, 'hasYarnLock', () => false);
+
     await npmInstallTask.run();
 
     assert.calledWith(fs.pathExists, path.join(artifactDir, 'package.json'));
