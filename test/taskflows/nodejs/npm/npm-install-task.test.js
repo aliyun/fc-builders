@@ -26,9 +26,23 @@ describe('test NpmInstallTask', () => {
 
     const npmInstallTask = new NpmInstallTask(artifactDir);
 
+    sandbox.replace(npmInstallTask, 'hasYarnLock', () => false);
+
     await npmInstallTask.run();
 
     assert.calledWith(fs.pathExists, path.join(artifactDir, 'package.json'));
-    assert.calledWith(cmd.execCommand, 'npm', ['install', '-q', '--no-audit', '--no-save'], artifactDir);
+    assert.calledWith(cmd.execCommand, 'npm', ['install', '-q', '--no-audit', '--no-save'], path.resolve(artifactDir));
+  });
+
+  it('test NpmInstallTask with yarn.lock', async () => {
+
+    const npmInstallTask = new NpmInstallTask(artifactDir);
+
+    sandbox.replace(npmInstallTask, 'hasYarnLock', () => true);
+
+    await npmInstallTask.run();
+
+    assert.calledWith(fs.pathExists, path.join(artifactDir, 'package.json'));
+    assert.calledWith(cmd.execCommand, 'yarn', ['install', '--silent', '--pure-lockfile'], path.resolve(artifactDir));
   });
 });
