@@ -30,7 +30,7 @@ const params = JSON.parse(program.jsonParams);
 
 if (params.method !== 'build') {
   log.error('only build method is supported');
-  return ;
+  return;
 }
 
 const builder = new Builder(params.serviceName,
@@ -39,6 +39,7 @@ const builder = new Builder(params.serviceName,
   params.runtime,
   params.artifactDir,
   params.verbose,
-  params.stages);
+  params.stages,
+  params.otherPayload);
 
 builder.build().catch(handler);
