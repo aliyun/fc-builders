@@ -6,7 +6,7 @@ rm -rf node_modules  && npm install
 PKG_VERSION=`node -p "require('./package').version"`
 
 ## package to binary
-pkg -t node8-linux-x64 --out-path -o ./output/fun-install-linux-64 .
+./node_modules/.bin/pkg -t node8-linux-x64 --out-path -o ./output/fun-install-linux-64 .
 
 ## rename and zip output files
 cd output
